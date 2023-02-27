@@ -1,8 +1,11 @@
-import "./Footer"
+import "./Footer.css"
 
 const Footer = () => {
   return (
-    <div>Footer</div>
+    <footer id="footer">
+      <p>ReactGram &copy; 2022</p>
+
+    </footer>
   )
 }
 
