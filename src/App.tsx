@@ -1,10 +1,16 @@
-import './App.css'
+import "./App.css";
+
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Home from "./pages/Home/Home";
 
 function App() {
-
   return (
-      <h1>ReactGram</h1>
-  )
+    <BrowserRouter>
+      <Routes>
+        
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
