@@ -10,13 +10,15 @@ import Footer from "./layouts/Footer/Footer";
 function App() {
   return (
     <BrowserRouter>
-      <Navbar/>
-      <Routes>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/register" element={<Register/>}/>
-      </Routes>
-      <Footer/>
+      <Navbar />
+      <div className="container">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </div>
+      <Footer />
     </BrowserRouter>
   );
 }
