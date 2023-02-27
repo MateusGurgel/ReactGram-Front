@@ -20,6 +20,15 @@ body {
   box-sizing: border-box;
 }
 
+input {
+  background-color: #3b3b3b;
+  color: #aaa;
+  border: 1px solid #555;
+  border-radius: 2px;
+  padding: 10px 8px;
+  outline: none;
+  margin-bottom: 0.6em;
+}
 
 @media (prefers-color-scheme: light) {
   :root {
