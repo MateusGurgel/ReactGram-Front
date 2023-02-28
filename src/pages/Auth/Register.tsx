@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { register, reset } from "../../slices/authSlice";
 import { store } from "../../store";
+import Message from "../../components/Message/Message";
 
 
 
@@ -18,7 +19,7 @@ const Register = () => {
 
   const dispath = useDispatch()
 
-  const {loading, error} = useSelector((state : any) => state.auth );
+  const {loading, error, status} = useSelector((state : any) => state.auth );
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -29,11 +30,8 @@ const Register = () => {
       password,
       confirmPassword,
     };
-
-    console.log(user);
-
+    
     store.dispatch(register(user))
-    //dispath(register(user))
   };
 
   useEffect(() => {
@@ -77,7 +75,9 @@ const Register = () => {
             setConfirmPassword(e.target.value);
           }}
         />
-        <input type="submit" value="Register" />
+        
+        <input type="submit" value="Register" disabled={loading} />
+        {error && <Message message={status} type="error"/>}
       </form>
       <p>
         Já tem conta? <Link to="/login">Clique aqui</Link>
