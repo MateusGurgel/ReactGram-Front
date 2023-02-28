@@ -1,13 +1,24 @@
 import "./Auth.css";
 
-import { FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
+
+import { FormEvent, useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import { register, reset } from "../../slices/authSlice";
+import { store } from "../../store";
+
+
 
 const Register = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
+
+  const dispath = useDispatch()
+
+  const {loading, error} = useSelector((state : any) => state.auth );
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -20,7 +31,14 @@ const Register = () => {
     };
 
     console.log(user);
+
+    store.dispatch(register(user))
+    //dispath(register(user))
   };
+
+  useEffect(() => {
+    dispath(reset());
+  }, [dispath])
 
   return (
     <div id="register">
