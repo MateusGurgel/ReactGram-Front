@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { Action } from "@remix-run/router";
 import authService from "../services/authService";
 
 const user = JSON.parse(localStorage.getItem("user") || "null");
@@ -23,6 +24,19 @@ export const register = createAsyncThunk(
     return data;
   }
 );
+
+export const login = createAsyncThunk(
+  "auth/login",
+  async(user: any, thunkAPI) => {
+    const data = await authService.login(user)
+
+    if (data.errors) {
+      return thunkAPI.rejectWithValue(data.errors[0])
+    }
+
+    return data;
+  }
+)
 
 export const logout = createAsyncThunk("auth/logout", async () => {
   authService.logout();
@@ -58,6 +72,24 @@ export const authSlice = createSlice({
         state.error = true;
         state.user = null;
         state.status = String(action.payload);
+      })
+      .addCase(login.pending, (state) => {
+        state.loading = true;
+        state.error = false;
+        state.success = false;
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = false;
+        state.success = true;
+        state.user = action.payload;
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.loading = false;
+        state.error = true;
+        state.success = false;
+        state.user = null;
+        state.status = String(action.payload)
       })
       .addCase(logout.fulfilled, (state) => {
         state.loading = false;
