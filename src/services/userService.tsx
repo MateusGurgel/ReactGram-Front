@@ -18,3 +18,5 @@ const profile = async (data: any, token: string) => {
   const userService = {
     profile
   }
+
+  export default userService;
