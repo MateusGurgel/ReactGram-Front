@@ -18,12 +18,31 @@ const register = async (data: any) => {
   }
 };
 
+const login = async (data: any) => {
+  const config = requestConfig("POST", data)
+
+  try {
+    const response = await fetch(api + "/users/login", config)
+    .then((response) => response.json())
+    .then((err) => err)
+
+    if (response){
+      localStorage.setItem("user", JSON.stringify(response))
+    }
+
+    return response;
+  } catch(error){
+    console.log(error)
+  }
+};
+
 const logout = () => {
   localStorage.removeItem("user")
 }
 
 const authService = {
   register,
+  login,
   logout,
 };
 
