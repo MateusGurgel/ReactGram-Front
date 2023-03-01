@@ -9,14 +9,25 @@ import {
 } from "react-icons/bs";
 
 // Hooks
-import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { logout, register, reset } from "../../slices/authSlice";
+import { store } from "../../store";
 
 const Navbar = () => {
   const { auth } = useAuth();
   const { user } = useSelector((state: any) => state.auth);
+
+  const navigate = useNavigate()
+
+  const dispath = useDispatch()
+
+  const handleLogout = () => {
+    store.dispatch(logout())
+    dispath(reset())
+    navigate("/login")
+  }
 
   return (
     <nav id="nav">
@@ -48,7 +59,7 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
-              <span>Sair</span>
+              <span onClick={handleLogout}>Exit</span>
             </li>
           </>
         ) : (
