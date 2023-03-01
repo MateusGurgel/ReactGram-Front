@@ -41,7 +41,7 @@ const Register = () => {
   return (
     <div id="register">
       <h2>ReactGram</h2>
-      <p className="subtitle">Cadastre-se para ver as fotos dos seus amigos.</p>
+      <p className="subtitle">Sign up to see your friends' pictures.</p>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -61,7 +61,7 @@ const Register = () => {
         />
         <input
           type="password"
-          placeholder="Senha"
+          placeholder="Password"
           value={password}
           onChange={(e) => {
             setPassword(e.target.value);
@@ -70,7 +70,7 @@ const Register = () => {
         <input
           type="password"
           value={confirmPassword}
-          placeholder="Confirme a senha"
+          placeholder="Confirm your password"
           onChange={(e) => {
             setConfirmPassword(e.target.value);
           }}
@@ -80,7 +80,7 @@ const Register = () => {
         {error && <Message message={status} type="error"/>}
       </form>
       <p>
-        Já tem conta? <Link to="/login">Clique aqui</Link>
+        Already have an account? <Link to="/login">Sign in</Link>
       </p>
     </div>
   );
