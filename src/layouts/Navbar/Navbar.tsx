@@ -59,7 +59,7 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li>
-              <span onClick={handleLogout}>Exit</span>
+              <span onClick={handleLogout}>Log out</span>
             </li>
           </>
         ) : (
