@@ -5,8 +5,9 @@ import { uploads } from "../../utils/config";
 import { FormEvent, useState, useEffect, ChangeEvent } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
-import { profile, resetMessage } from "../../slices/userSlice";
+import { profile, resetMessage, updateProfile } from "../../slices/userSlice";
 import { store } from "../../store";
+import Message from "../../components/Message/Message";
 
 const EditProfile = () => {
 
@@ -35,9 +36,42 @@ const EditProfile = () => {
     }
   }, [user])
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) =>{
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) =>{
     e.preventDefault()
 
+        // Gather user data from states
+    let userData : any = {
+      name,
+    };
+
+    if (profileImage) {
+      userData.profileImage = profileImage;
+    }
+
+    if (bio) {
+      userData.bio = bio;
+    }
+
+    if (password) {
+      userData.password = password;
+    }
+
+    // build form data
+    const formData = new FormData();
+
+    let userFormData : any
+
+    userFormData = Object.keys(userData).forEach((key) =>
+      formData.append(key, userData[key])
+    );
+
+    formData.append("user", userFormData);
+
+    await store.dispatch(updateProfile(formData));
+
+    setTimeout(() => {
+      dispatch(resetMessage());
+    }, 2000);
   }
 
   const handleFile = (e: ChangeEvent<HTMLInputElement>) => {
@@ -80,7 +114,8 @@ const EditProfile = () => {
           <span>Do you want to change your password?</span>
           <input type="password" placeholder="Enter your new password" onChange={(e) => {setPassword(e.target.value)}} value={password} />
         </label>
-        <input type="submit" value="Update"/>
+        <input type="submit" value="Update" disabled={loading}/>
+        {message && <Message message={message} type={error ? "error" : "success"} />} 
       </form>
     </div>
   )
