@@ -5,14 +5,14 @@ export const requestConfig = (
   method: string,
   data?: BodyInit,
   token?: string,
-  image?: Blob
+  image?: true
 ) => {
   let config: RequestInit;
   method = method.toUpperCase();
 
   if (image) {
     config = {
-      method: method.toUpperCase(),
+      method: method,
       body: data,
       headers: {},
     };
