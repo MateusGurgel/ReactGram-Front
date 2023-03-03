@@ -18,9 +18,6 @@ const profile = async (data: any, token: string) => {
   const updateProfile = async (data: any, token: string) => {
     const config = requestConfig("PUT", data, token, true);
   
-    console.log(config);
-    console.log(data);
-  
     try {
       const res = await fetch(api + "/users/", config)
         .then((res) => res.json())
@@ -32,8 +29,24 @@ const profile = async (data: any, token: string) => {
     }
   };
 
+  const getUserDetails = async (id: string) => {
+    const config = requestConfig("GET");
+  
+    try {
+      const res = await fetch(api + "/users/" + id, config)
+        .then((res) => res.json())
+        .catch((err) => err);
+  
+      return res;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const userService = {
-    profile
+    profile,
+    updateProfile,
+    getUserDetails
   }
 
 
