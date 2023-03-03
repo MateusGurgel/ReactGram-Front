@@ -44,4 +44,5 @@ const initialState = {
     }
   });
 
+  export const { resetMessage } = userSlice.actions;
   export default userSlice.reducer;
