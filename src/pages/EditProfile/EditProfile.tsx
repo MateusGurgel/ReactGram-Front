@@ -18,7 +18,6 @@ const EditProfile = () => {
   const [name, setName] = useState<string>("")
   const [email, setEmail] = useState<string>("")
   const [password, setPassword] = useState<string>("")
-  const [profileImage, setProfileImage] = useState<string>("")
   const [bio, setBio] = useState<string>("")
   const [previewImage, setPreviewImage] = useState<File>()
   const [imageProfile, setImageProfile] = useState<File>()
@@ -44,8 +43,8 @@ const EditProfile = () => {
       name,
     };
 
-    if (profileImage) {
-      userData.profileImage = profileImage;
+    if (imageProfile) {
+      userData.profileImage = imageProfile;
     }
 
     if (bio) {
