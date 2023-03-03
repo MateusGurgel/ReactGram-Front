@@ -7,7 +7,7 @@ import Register from "./pages/Auth/Register";
 import Navbar from "./layouts/Navbar/Navbar";
 import Footer from "./layouts/Footer/Footer";
 import { useAuth } from "./hooks/useAuth";
-import EditProfile from "./pages/Profile/Profile";
+import EditProfile from "./pages/EditProfile/EditProfile";
 
 function App() {
   const {auth, loading} = useAuth()
