@@ -2,14 +2,24 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import photoService from "../services/photoService";
 import { profile } from "./userSlice";
 
-const initialState = {
-    photos: [{}],
+interface InitialState {
+    photos: object[],
+    photo: object,
+    error: boolean,
+    success: boolean,
+    loading: boolean,
+    message: string,
+}
+
+const initialState: InitialState = {
+    photos: [],
     photo: {},
     error: false,
     success: false,
     loading: false,
     message: "",
 };
+
 
 export const publishPhoto = createAsyncThunk(
     "photo/publish",
@@ -21,6 +31,20 @@ export const publishPhoto = createAsyncThunk(
       if (data.errors) {
         return thunkAPI.rejectWithValue(data.errors[0]);
       }
+  
+      return data;
+    }
+  );
+
+  export const getUserPhotos = createAsyncThunk(
+    "photo/userphotos",
+    async (id: string, thunkAPI: any) => {
+      const token = thunkAPI.getState().auth.user.token;
+  
+      const data = await photoService.getUserPhotos(id);
+  
+      console.log(data);
+      console.log(data.errors);
   
       return data;
     }
@@ -56,6 +80,17 @@ export const photoSlice = createSlice({
             state.photo = action.payload;
             state.photos.unshift(state.photo);
             state.message = "photo published successfully"
+        })
+        .addCase(getUserPhotos.pending, (state) => {
+            state.loading = true;
+            state.error = false;
+            state.success = false;
+        })
+        .addCase(getUserPhotos.fulfilled, (state, action : any) => {
+            state.loading = false;
+            state.error = false;
+            state.success = true;
+            state.photos = action.payload;
         })
     }
 });
