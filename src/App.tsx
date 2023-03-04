@@ -9,6 +9,7 @@ import Footer from "./layouts/Footer/Footer";
 import { useAuth } from "./hooks/useAuth";
 import EditProfile from "./pages/EditProfile/EditProfile";
 import Profile from "./pages/Profile/Profile";
+import Photo from "./pages/Photo/photo";
 
 function App() {
   const {auth, loading} = useAuth()
@@ -27,6 +28,7 @@ function App() {
           <Route path="/profile" element={auth ? <EditProfile/> : <Navigate to="/login"/>} />
           <Route path="/login" element={!auth ? <Login /> : <Navigate to="/"/>} />
           <Route path="/register" element={!auth ? <Register /> : <Navigate to="/"/>} />
+          <Route path="/photos/:id" element={auth ? <Photo/> : <Navigate to="/login"/>}/>
         </Routes>
       </div>
       <Footer />
