@@ -9,7 +9,7 @@ import Footer from "./layouts/Footer/Footer";
 import { useAuth } from "./hooks/useAuth";
 import EditProfile from "./pages/EditProfile/EditProfile";
 import Profile from "./pages/Profile/Profile";
-import Photo from "./pages/Photo/photo";
+import Photo from "./pages/Photo/Photo";
 
 function App() {
   const {auth, loading} = useAuth()
