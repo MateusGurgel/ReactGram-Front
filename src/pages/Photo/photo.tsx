@@ -1,9 +1,9 @@
-import "./photo.css"
+import "./Photo.css"
 
-const photo = () => {
+const Photo = () => {
   return (
     <div>photo</div>
   )
 }
 
-export default photo
+export default Photo
