@@ -8,7 +8,8 @@ import {
   BsFillCameraFill,
 } from "react-icons/bs";
 
-// Hooks
+
+import {useState, FormEvent} from "react"
 import { useAuth } from "../../hooks/useAuth";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -23,6 +24,16 @@ const Navbar = () => {
 
   const dispath = useDispatch()
 
+  const [query, SetQuery] = useState("")
+
+  const handleQuery = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    if (query){
+      return navigate(`/search/?q=${query}`)
+    }
+  }
+
   const handleLogout = () => {
     store.dispatch(logout())
     dispath(reset())
@@ -32,9 +43,9 @@ const Navbar = () => {
   return (
     <nav id="nav">
       <Link to="/">ReactGram</Link>
-      <form id="search-form">
+      <form id="search-form" onSubmit={handleQuery}>
         <BsSearch />
-        <input type="text" placeholder="Search" />
+        <input type="text" placeholder="Search" value={query} onChange={(e) => SetQuery(e.target.value)} />
       </form>
 
       <ul id="nav-links">
