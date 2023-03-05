@@ -71,7 +71,7 @@ const getPhoto = async (id: string) => {
 };
 
 const likePhoto = async (id : string, token : string) => {
-  const config = requestConfig("PUT", token);
+  const config = requestConfig("PUT", undefined, token);
 
   try {
     const res = await fetch(api + "/photos/like/" + id, config)
