@@ -84,6 +84,34 @@ const likePhoto = async (id : string, token : string) => {
   }
 };
 
-const photoService = { publishPhoto, getUserPhotos, deletePhoto, updatePhoto, getPhoto, likePhoto};
+const commentPhoto = async (data: any, id: string, token: string) => {
+  const config = requestConfig("PUT", data, token);
+
+  try {
+    const res = await fetch(api + "/photos/comment/" + id, config)
+      .then((res) => res.json())
+      .catch((err) => err);
+
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getAllPhotos = async () => {
+  const config = requestConfig("GET");
+
+  try {
+    const res = await fetch(api + "/photos", config)
+      .then((res) => res.json())
+      .catch((err) => err);
+
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const photoService = { publishPhoto, getUserPhotos, deletePhoto, updatePhoto, getPhoto, likePhoto, commentPhoto, getAllPhotos};
 
 export default photoService;
