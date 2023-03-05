@@ -112,6 +112,20 @@ const getAllPhotos = async () => {
   }
 };
 
-const photoService = { publishPhoto, getUserPhotos, deletePhoto, updatePhoto, getPhoto, likePhoto, commentPhoto, getAllPhotos};
+const searchPhotos = async (query: string) => {
+  const config = requestConfig("GET");
+
+  try {
+    const res = await fetch(api + "/photos/search?q=" + query, config)
+      .then((res) => res.json())
+      .catch((err) => err);
+
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const photoService = { publishPhoto, getUserPhotos, deletePhoto, updatePhoto, getPhoto, likePhoto, commentPhoto, getAllPhotos, searchPhotos};
 
 export default photoService;
